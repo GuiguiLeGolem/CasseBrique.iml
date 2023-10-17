@@ -61,7 +61,7 @@ public class Balle {
     public Color getCouleur() {
         return couleur;
     }
-
+//ftft
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
