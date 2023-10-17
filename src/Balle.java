@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.function.DoubleToIntFunction;
 
 public class Balle {
 
@@ -13,7 +12,6 @@ public class Balle {
     public void deplacement() {
         this.positionX += this.vitesseHorizontal;
         this.positionY += this.vitesseVertical;
-        //System.out.println("debug: positionY == " + this.positionY);
     }
 
     public void testCollision() {
@@ -32,12 +30,20 @@ public class Balle {
 
     public void rebond(Barre barre){
 
+        int uneDemiBarreHorizontal = barre.longueur/2;
+        int uneDemiBarreVertical = barre.largeur/2;
+        int extremiteGaucheX = barre.positionX - uneDemiBarreHorizontal;
+        int extremiteDroiteX = barre.positionX + uneDemiBarreHorizontal;
+        int extremiteSupperieurGauche = (barre.positionY - uneDemiBarreVertical);
+        int extremiteSupperieurDroit = (barre.positionY - uneDemiBarreVertical);
 
 
-        if(this.positionY >= (barre.positionY + (barre.largeur/2))){
 
-            //vérifier que la balle touche la barre horizontalement
-            if(this.positionX <= (barre.positionX + barre.longueur/2) || this.positionX >= (barre.positionX + barre.longueur/2)){
+        //vérifier que la balle touche la barre Verticalement / Axe Y
+        if(this.positionX <= extremiteDroiteX && (this.positionX + (this.diametre/2)) >= extremiteGaucheX){
+
+            //vérifier que la balle touche la barre Horizontalement / Axe X
+            if((this.positionY + (this.diametre/2)) >= extremiteSupperieurDroit){
                 this.vitesseVertical = - vitesseVertical;
             }
 

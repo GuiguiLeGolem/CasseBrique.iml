@@ -41,7 +41,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
     public void demarrer() throws InterruptedException {
 
         Balle balle = new Balle();
-        barre = new Barre(185, 620, 7, Color.ORANGE, 125, 20);
+        barre = new Barre(185, 620, 8, Color.ORANGE, 125, 20);
 
         while(true) {
 
@@ -78,11 +78,9 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
         switch( keyCode ) {
             case KeyEvent.VK_LEFT:
                 barre.deplacement(false);
-                System.out.println("debug : LEFT");
                 break;
             case KeyEvent.VK_RIGHT :
                 barre.deplacement(true);
-                System.out.println("debug : RIGHT");
                 break;
         }
     }
