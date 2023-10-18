@@ -2,26 +2,27 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Barre extends Sprite implements KeyListener {
+public class Barre extends Sprite{
 
     protected int longueur;
     protected int largeur;
 
-    public Barre(int positionX, int positionY, int vitesseHorizontal, Color couleur, int longueur, int largeur) {
-        super(positionX, positionY, vitesseHorizontal, couleur);
+    public Barre(int positionX, int positionY, Color couleur, int longueur, int largeur) {
+        super(positionX, positionY, couleur);
         this.longueur = longueur;
         this.largeur = largeur;
     }
 
-    public void deplacement(boolean yes){
-        if(yes){
-            this.positionX += vitesseHorizontal;
-        }
-        else if (!yes){
-            this.positionX -= vitesseHorizontal;
-        }
+    public void deplacement(){
+        //if(yes){
+        //    this.positionX += vitesseHorizontal;
+        //}
+        //else if (!yes){
+        //    this.positionX -= vitesseHorizontal;
+        //}
     }
 
+    @Override
     public void dessiner(Graphics2D dessin) {
         dessin.setColor(couleur);
         dessin.fillRect(positionX, positionY, longueur, largeur);
@@ -50,20 +51,5 @@ public class Barre extends Sprite implements KeyListener {
 
     public void setLargeur(int largeur) {
         this.largeur = largeur;
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 }

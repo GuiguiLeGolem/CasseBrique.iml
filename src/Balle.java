@@ -1,13 +1,16 @@
 import java.awt.*;
 
-public class Balle {
+public class Balle extends Rond implements Deplacable{
 
-    private int positionX = 0;
+
     private int vitesseHorizontal = 4;
-    private int positionY = 0;
     private int vitesseVertical = 3;
-    private int diametre = 30;
-    private Color couleur = Color.blue;
+
+    public Balle(int positionX, int positionY, Color couleur, int diametre, int vitHori, int vitVert) {
+        super(positionX, positionY, couleur, diametre);
+        this.vitesseHorizontal = vitHori;
+        this.vitesseVertical = vitVert;
+    }
 
     public void deplacement() {
         this.positionX += this.vitesseHorizontal;
@@ -21,11 +24,6 @@ public class Balle {
         if(this.positionY >= CasseBrique.hauteur - diametre || this.positionY <= 0) {
             this.vitesseVertical = -vitesseVertical;
         }
-    }
-
-    public void dessiner (Graphics2D dessin) {
-        dessin.setColor(couleur);
-        dessin.fillOval(positionX,positionY,diametre,diametre);
     }
 
     public void rebond(Barre barre){
@@ -58,36 +56,12 @@ public class Balle {
         this.diametre = diametre;
     }
 
-    public Color getCouleur() {
-        return couleur;
-    }
-//ftft
-    public void setCouleur(Color couleur) {
-        this.couleur = couleur;
-    }
-
-    public int getPositionX() {
-        return positionX;
-    }
-
-    public void setPositionX(int positionX) {
-        this.positionX = positionX;
-    }
-
     public int getVitesseHorizontal() {
         return vitesseHorizontal;
     }
 
     public void setVitesseHorizontal(int vitesseHorizontal) {
         this.vitesseHorizontal = vitesseHorizontal;
-    }
-
-    public int getPositionY() {
-        return positionY;
-    }
-
-    public void setPositionY(int positionY) {
-        this.positionY = positionY;
     }
 
     public int getVitesseVertical() {

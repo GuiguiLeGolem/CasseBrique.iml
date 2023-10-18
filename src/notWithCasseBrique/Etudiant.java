@@ -1,3 +1,5 @@
+package notWithCasseBrique;
+
 public class Etudiant extends Personne {
 
     private int noteGlobale;
