@@ -45,10 +45,12 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
 
             ArrayList<Balle> lesBalles = new ArrayList<>();
 
-            lesBalles.add(new Balle(165, 580, Color.BLUE, 35, 4, 3));
+            lesBalles.add(new Balle(165, 580, Color.BLUE, 35, 7, 4));
 
             ArrayList<Brique> listeBrique = new ArrayList<>();
+            ArrayList<Bonus> lesBonus = new ArrayList<>();
 
+            lesBonus.add(new Bonus( 400, 150, Color.CYAN, 45, 45));
             listeBrique.add(new Brique(400, 150, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(350, 150, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(300, 150, Color.BLACK, 45, 45));
@@ -62,16 +64,25 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             listeBrique.add(new Brique(300, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(250, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(200, 100, Color.BLACK, 45, 45));
+
+            lesBonus.add(new Bonus( 150, 100, Color.CYAN, 45, 45));//
+
             listeBrique.add(new Brique(150, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(100, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique( 50, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(400, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(350, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(300, 200, Color.BLACK, 45, 45));
+
+            lesBonus.add(new Bonus( 250, 200, Color.CYAN, 45, 45));//
+
             listeBrique.add(new Brique(250, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(200, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(150, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(100, 200, Color.BLACK, 45, 45));
+
+            lesBonus.add(new Bonus( 50, 200, Color.CYAN, 45, 45));//
+
             listeBrique.add(new Brique( 50, 200, Color.BLACK, 45, 45));
 
             ArrayList<Vie> laVie = new ArrayList<>();
@@ -79,8 +90,6 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             laVie.add(new Vie(450, 25, Color.RED, 25));
             laVie.add(new Vie(420, 25, Color.RED, 25));
             laVie.add(new Vie(390, 25, Color.RED, 25));
-
-            ArrayList<Bonus> lesBonus = new ArrayList<>();
 
             while(true) {
                 Graphics2D dessin = (Graphics2D) getBufferStrategy().getDrawGraphics();
@@ -96,7 +105,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                     balle.dessiner(dessin);
                     balle.testCollision();
                     balle.rebond(barre);
-                    balle.detruitBrique(listeBrique); //si une balle touche une brique : la brique meurt
+                    balle.detruitBrique(listeBrique, lesBonus); //si une balle touche une brique : la brique meurt
 
                     if(balle.positionY >= 700 - balle.diametre){
                         if(!laVie.isEmpty()){
@@ -109,9 +118,18 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
 
                 barre.dessiner(dessin);
                 barre.testCollision();
+                barre.colisionBonus(lesBonus);
+
+                for(Bonus bonus: lesBonus){
+                    bonus.dessiner(dessin);
+                }
 
                 for (Brique brique: listeBrique) {
                     brique.dessiner(dessin);
+                }
+
+                for(Bonus bonus: lesBonus){
+                    bonus.deplacement();
                 }
 
                 for (Vie vie: laVie) {

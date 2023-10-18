@@ -41,10 +41,20 @@ public class Balle extends Rond implements Deplacable{
         }
     }
 
-    public void detruitBrique(ArrayList<Brique> listeBrique) {
+    public void detruitBrique(ArrayList<Brique> listeBrique, ArrayList<Bonus> lesBonus) {
         for(Brique brique: listeBrique){
             if(this.positionX <= (brique.positionX + (brique.largeur/2)) && this.positionX >= (brique.positionX - (brique.largeur/2))){
                 if(this.positionY <= (brique.positionY + (brique.hauteur/2)) && this.positionY >= (brique.positionY - (brique.hauteur/2))){
+
+                    //Si il y avait un bonus derrière la brique, le bonus ce met à tomber
+                    for(Bonus bonus: lesBonus){
+                        if(bonus.positionY == brique.positionY && bonus.positionX == brique.positionX){
+                            bonus.setToucher(true);
+                            bonus.deplacement();
+                            break;
+                        }
+                    }
+
                     listeBrique.remove(brique);
                     this.vitesseHorizontal = - this.vitesseHorizontal;
                     this.vitesseVertical = - this.vitesseVertical;

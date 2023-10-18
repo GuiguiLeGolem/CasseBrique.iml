@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class Barre extends Sprite{
 
@@ -33,6 +34,23 @@ public class Barre extends Sprite{
         }
         else if (this.positionX <= 0){
             this.positionX = 0;
+        }
+    }
+
+    public void colisionBonus(ArrayList<Bonus> lesBonus){
+        int uneDemiBarreHorizontal = longueur/2;
+        int uneDemiBarreVertical = largeur/2;
+        int extremiteGaucheX = positionX - uneDemiBarreHorizontal;
+        int extremiteDroiteX = positionX + uneDemiBarreHorizontal;
+        int extremiteSupperieurY = positionY - uneDemiBarreVertical;
+        int extremiteInferieurY = positionY + uneDemiBarreVertical;
+
+        for(Bonus bonus: lesBonus){
+            if(bonus.positionY >= extremiteSupperieurY &&  bonus.positionY <= extremiteInferieurY){
+                if(bonus.positionX >= extremiteGaucheX && bonus.positionX <= extremiteDroiteX){
+                    bonus.testCollision();
+                }
+            }
         }
     }
 

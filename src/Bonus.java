@@ -4,13 +4,17 @@ import java.util.random.RandomGenerator;
 
 public class Bonus extends Rectangle implements Deplacable{
 
+    private boolean toucher = false;
+
     public Bonus(int positionX, int positionY, Color couleur, int largeur, int hauteur) {
         super(positionX, positionY, couleur, largeur, hauteur);
     }
 
     @Override
     public void deplacement() {
-        positionY -= 5;
+        if(toucher){
+            positionY += 5;
+        }
     }
 
     @Override
@@ -23,5 +27,19 @@ public class Bonus extends Rectangle implements Deplacable{
         else if(result == 2){
         //Ajouter une Vie à la liste des Vie
         }
+    }
+
+    @Override
+    public void dessiner(Graphics2D dessin) {
+        dessin.setColor(couleur);
+        dessin.fillRect(positionX, positionY, largeur, hauteur);
+    }
+
+    public boolean isToucher() {
+        return toucher;
+    }
+
+    public void setToucher(boolean toucher) {
+        this.toucher = toucher;
     }
 }
