@@ -9,7 +9,6 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
     public static final int hauteur = 700;
 
     protected Barre barre;
-    protected Balle balle;
     protected int vitesseHorizontalBarre = 10;
 
     JFrame fenetre = new JFrame();
@@ -42,14 +41,19 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
 
     public void demarrer() throws InterruptedException {
         try{
-            balle = new Balle(165, 580, Color.BLUE, 35, 4, 3);
             barre = new Barre(185, 620, Color.ORANGE, 125, 20);
 
-            ArrayList<Brique> listBrique = new ArrayList<>();
+            ArrayList<Balle> lesBalles = new ArrayList<>();
 
-            listBrique.add(new Brique(300, 150, Color.BLACK, 45, 45));
-            listBrique.add(new Brique(200, 150, Color.BLACK, 45, 45));
-            listBrique.add(new Brique(100, 150, Color.BLACK, 45, 45));
+            lesBalles.add(new Balle(165, 580, Color.BLUE, 35, 4, 3));
+            lesBalles.add(new Balle(165, 30, Color.BLUE, 35, 4, 3));
+            lesBalles.add(new Balle(10, 69, Color.BLUE, 35, 4, 3));
+
+            ArrayList<Brique> listeBrique = new ArrayList<>();
+
+            listeBrique.add(new Brique(300, 150, Color.BLACK, 45, 45));
+            listeBrique.add(new Brique(200, 150, Color.BLACK, 45, 45));
+            listeBrique.add(new Brique(100, 150, Color.BLACK, 45, 45));
 
             ArrayList<Vie> laVie = new ArrayList<>();
 
@@ -58,7 +62,6 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             laVie.add(new Vie(390, 25, Color.RED, 25));
 
             while(true) {
-
                 Graphics2D dessin = (Graphics2D) getBufferStrategy().getDrawGraphics();
 
                 //----------------------
@@ -66,20 +69,25 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                 dessin.setColor(Color.white);
                 dessin.fillRect(0,0,largeur,hauteur);
 
-                balle.dessiner(dessin);
-                balle.deplacement();
-                balle.testCollision();
-                balle.rebond(barre);
+                for (Balle balle: lesBalles){
+
+                    balle.deplacement();
+                    balle.dessiner(dessin);
+                    balle.testCollision();
+                    balle.rebond(barre);
+
+                    if(balle.positionY >= 700 - balle.diametre){
+                        if(!laVie.isEmpty()){
+                            laVie.remove(laVie.getLast());
+                        }
+                    }
+                }
 
                 barre.dessiner(dessin);
                 barre.testCollision();
 
-                for (Brique brique: listBrique) {
+                for (Brique brique: listeBrique) {
                     brique.dessiner(dessin);
-                }
-
-                if(balle.positionY >= 700 - balle.diametre){
-                    laVie.remove(laVie.getLast());
                 }
 
                 for (Vie vie: laVie) {
@@ -94,10 +102,13 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                 if(laVie.isEmpty()){
                     break;
                 }
+                else if (listeBrique.isEmpty()){
+                    break;
+                }
             }
         }
-        catch (InterruptedException InEx){
-
+        catch (InterruptedException InEx) {
+            throw new RuntimeException(InEx);
         }
 
         recommencer();
