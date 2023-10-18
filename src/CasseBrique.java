@@ -38,7 +38,6 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
         //panneau.addMouseListener(this);
 
         this.demarrer();
-
     }
 
     public void demarrer() throws InterruptedException {
@@ -48,9 +47,9 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
 
             ArrayList<Brique> listBrique = new ArrayList<>();
 
-            listBrique.add(new Brique(300, 150, Color.BLACK, 50, 50));
-            listBrique.add(new Brique(250, 150, Color.BLACK, 49, 49));
-            listBrique.add(new Brique(200, 150, Color.BLACK, 49, 49));
+            listBrique.add(new Brique(300, 150, Color.BLACK, 45, 45));
+            listBrique.add(new Brique(200, 150, Color.BLACK, 45, 45));
+            listBrique.add(new Brique(100, 150, Color.BLACK, 45, 45));
 
             ArrayList<Vie> laVie = new ArrayList<>();
 
@@ -79,6 +78,10 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                     brique.dessiner(dessin);
                 }
 
+                if(balle.positionY >= 700 - balle.diametre){
+                    laVie.remove(laVie.getLast());
+                }
+
                 for (Vie vie: laVie) {
                     vie.dessiner(dessin);
                 }
@@ -87,15 +90,29 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                 dessin.dispose();
                 getBufferStrategy().show();
                 Thread.sleep(1000 / 60); // Pour avoir une vitesse adéquat
+
+                if(laVie.isEmpty()){
+                    break;
+                }
             }
         }
         catch (InterruptedException InEx){
 
         }
+
+        recommencer();
     }
 
-    public void recommencer(){
+    public void recommencer() throws InterruptedException {
 
+        int result = JOptionPane.showConfirmDialog((Component) null, "Voulez-vous réessayer ?", "GAME OVER", JOptionPane.OK_CANCEL_OPTION);
+
+        if(result == 0){
+            demarrer();
+        }
+        else {
+            fenetre.dispatchEvent(new WindowEvent(fenetre, WindowEvent.WINDOW_CLOSING));
+        }
     }
 
     @Override
@@ -108,12 +125,10 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
         int keyCode = e.getKeyCode();
         switch( keyCode ) {
             case KeyEvent.VK_LEFT:
-                //barre.deplacement(false);
-                barre.positionX -= vitesseHorizontalBarre;
+                barre.deplacementGauche();
                 break;
             case KeyEvent.VK_RIGHT :
-                //barre.deplacement(true);
-                barre.positionX += vitesseHorizontalBarre;
+                barre.deplacementDroite();
                 break;
         }
     }

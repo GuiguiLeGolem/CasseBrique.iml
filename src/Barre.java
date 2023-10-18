@@ -13,13 +13,12 @@ public class Barre extends Sprite{
         this.largeur = largeur;
     }
 
-    public void deplacement(){
-        //if(yes){
-        //    this.positionX += vitesseHorizontal;
-        //}
-        //else if (!yes){
-        //    this.positionX -= vitesseHorizontal;
-        //}
+    public void deplacementDroite(){
+        this.positionX += 10;
+    }
+
+    public void deplacementGauche(){
+        this.positionX -= 10;
     }
 
     @Override

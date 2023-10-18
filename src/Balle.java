@@ -24,6 +24,8 @@ public class Balle extends Rond implements Deplacable{
         if(this.positionY >= CasseBrique.hauteur - diametre || this.positionY <= 0) {
             this.vitesseVertical = -vitesseVertical;
         }
+
+
     }
 
     public void rebond(Barre barre){
