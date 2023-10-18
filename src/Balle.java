@@ -46,6 +46,8 @@ public class Balle extends Rond implements Deplacable{
             if(this.positionX <= (brique.positionX + (brique.largeur/2)) && this.positionX >= (brique.positionX - (brique.largeur/2))){
                 if(this.positionY <= (brique.positionY + (brique.hauteur/2)) && this.positionY >= (brique.positionY - (brique.hauteur/2))){
                     listeBrique.remove(brique);
+                    this.vitesseHorizontal = - this.vitesseHorizontal;
+                    this.vitesseVertical = - this.vitesseVertical;
                     break;
                 }
             }
