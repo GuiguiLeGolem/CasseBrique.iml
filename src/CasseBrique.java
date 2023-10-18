@@ -61,6 +61,8 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             laVie.add(new Vie(420, 25, Color.RED, 25));
             laVie.add(new Vie(390, 25, Color.RED, 25));
 
+            ArrayList<Bonus> lesBonus = new ArrayList<>();
+
             while(true) {
                 Graphics2D dessin = (Graphics2D) getBufferStrategy().getDrawGraphics();
 
@@ -75,6 +77,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                     balle.dessiner(dessin);
                     balle.testCollision();
                     balle.rebond(barre);
+                    balle.detruitBrique(listeBrique);
 
                     if(balle.positionY >= 700 - balle.diametre){
                         if(!laVie.isEmpty()){
