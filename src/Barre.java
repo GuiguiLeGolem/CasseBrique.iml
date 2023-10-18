@@ -46,8 +46,16 @@ public class Barre extends Sprite{
         int extremiteInferieurY = positionY + uneDemiBarreVertical;
 
         for(Bonus bonus: lesBonus){
+
+            int coteHautBonus = bonus.positionY - (bonus.hauteur/2);
+            int coteBasBonus = bonus.positionY + (bonus.hauteur/2);
+            int coteGaucheBonus = bonus.positionX - (bonus.largeur/2);
+            int coteDroitBonus = bonus.positionX + (bonus.largeur/2);
+
             if(bonus.positionY >= extremiteSupperieurY &&  bonus.positionY <= extremiteInferieurY){
-                if(bonus.positionX >= extremiteGaucheX && bonus.positionX <= extremiteDroiteX){
+                if((bonus.positionX >= extremiteGaucheX && bonus.positionX <= extremiteDroiteX)
+                        || ((coteGaucheBonus <= extremiteGaucheX && coteDroitBonus >= extremiteGaucheX)
+                        || (coteDroitBonus >= extremiteDroiteX && coteGaucheBonus <= extremiteDroiteX))){
                     bonus.testCollision();
                 }
             }
