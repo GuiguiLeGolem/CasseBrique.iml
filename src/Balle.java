@@ -30,10 +30,10 @@ public class Balle extends Rond implements Deplacable{
         int uneDemiBarreVertical = barre.largeur/2;
         int extremiteGaucheX = barre.positionX - uneDemiBarreHorizontal;
         int extremiteDroiteX = barre.positionX + uneDemiBarreHorizontal;
-        int extremiteSupperieur = (barre.positionY - uneDemiBarreVertical);
+        int extremiteSupperieur = barre.positionY - uneDemiBarreVertical;
 
         //vérifier que la balle touche la barre Verticalement / Axe Y
-        if(this.positionX <= extremiteDroiteX && (this.positionX + (this.diametre/2)) >= extremiteGaucheX){
+        if((this.positionX + this.diametre) >= extremiteGaucheX && (this.positionX - this.diametre) <= extremiteDroiteX){
             //vérifier que la balle touche la barre Horizontalement / Axe X
             if((this.positionY + (this.diametre/2)) >= extremiteSupperieur){
                 this.vitesseVertical = - vitesseVertical;

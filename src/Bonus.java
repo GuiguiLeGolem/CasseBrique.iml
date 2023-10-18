@@ -20,5 +20,8 @@ public class Bonus extends Rectangle implements Deplacable{
         if(result == 1){
             new Balle(165, 580, Color.BLUE, 35, 4, 3);
         }
+        else if(result == 2){
+        //Ajouter une Vie à la liste des Vie
+        }
     }
 }

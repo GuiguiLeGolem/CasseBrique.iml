@@ -46,8 +46,6 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             ArrayList<Balle> lesBalles = new ArrayList<>();
 
             lesBalles.add(new Balle(165, 580, Color.BLUE, 35, 4, 3));
-            //lesBalles.add(new Balle(165, 30, Color.BLUE, 35, 4, 3));
-            //lesBalles.add(new Balle(10, 69, Color.BLUE, 35, 4, 3));
 
             ArrayList<Brique> listeBrique = new ArrayList<>();
 
@@ -58,7 +56,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             listeBrique.add(new Brique(200, 150, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(150, 150, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(100, 150, Color.BLACK, 45, 45));
-            listeBrique.add(new Brique(50, 150, Color.BLACK, 45, 45));
+            listeBrique.add(new Brique( 50, 150, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(400, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(350, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(300, 100, Color.BLACK, 45, 45));
@@ -66,7 +64,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             listeBrique.add(new Brique(200, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(150, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(100, 100, Color.BLACK, 45, 45));
-            listeBrique.add(new Brique(50, 100, Color.BLACK, 45, 45));
+            listeBrique.add(new Brique( 50, 100, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(400, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(350, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(300, 200, Color.BLACK, 45, 45));
@@ -74,7 +72,7 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
             listeBrique.add(new Brique(200, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(150, 200, Color.BLACK, 45, 45));
             listeBrique.add(new Brique(100, 200, Color.BLACK, 45, 45));
-            listeBrique.add(new Brique(50, 200, Color.BLACK, 45, 45));
+            listeBrique.add(new Brique( 50, 200, Color.BLACK, 45, 45));
 
             ArrayList<Vie> laVie = new ArrayList<>();
 
@@ -103,6 +101,8 @@ public class CasseBrique extends Canvas implements KeyListener, MouseListener {
                     if(balle.positionY >= 700 - balle.diametre){
                         if(!laVie.isEmpty()){
                             laVie.remove(laVie.getLast());
+                            balle.setPositionX(165);
+                            balle.setPositionY(580);
                         }
                     }
                 }
